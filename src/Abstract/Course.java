@@ -1,6 +1,7 @@
 package Abstract;
 
 import java.util.UUID;
+import Interface.Sertification;
 
 /**
  * Abstract class representing a Course entity.
@@ -70,7 +71,7 @@ public abstract class Course {
 }
 
 // Subclass 1: Video Course
-class VideoCourse extends Course {
+class VideoCourse extends Course implements Sertification {
     private int totalVideoCount;
 
     public VideoCourse(UUID courseId, String title, String instructorName, int durationWeeks, int totalVideoCount) {
@@ -92,6 +93,16 @@ class VideoCourse extends Course {
         return progressPercentage >= 100.0f && portfolioScore >= 70.0;
     }
 
+    @Override
+    public void generateSertif() {
+        System.out.println("Menerbitkan sertifikat kelulusan Video Course: " + getTitle());
+    }
+    
+    @Override
+    public void downloadSertif() {
+        System.out.println("Mendownload file sertifikat Video Course: " + getTitle() + ".pdf");
+    }
+
     public int getTotalVideoCount() { return totalVideoCount; }
 
     @Override
@@ -101,7 +112,7 @@ class VideoCourse extends Course {
 }
 
 // Subclass 2: Live Bootcamp Course
-class LiveBootcampCourse extends Course {
+class LiveBootcampCourse extends Course implements Sertification{
     private int minAttendancePercentage;
 
     public LiveBootcampCourse(UUID courseId, String title, String instructorName, int durationWeeks, int minAttendancePercentage) {
@@ -117,12 +128,23 @@ class LiveBootcampCourse extends Course {
         return "Live_Bootcamp";
     }
 
+    
     @Override
     public boolean checkCompletionCriteria(float progressPercentage, double portfolioScore) {
         // Untuk Bootcamp: Syarat kelulusan lebih ketat (Portfolio minimal 80)
         return progressPercentage >= minAttendancePercentage && portfolioScore >= 80.0;
     }
 
+    @Override
+    public void generateSertif() {
+        System.out.println("Menerbitkan sertifikat kelulusan Live Bootcamp: " + getTitle());
+    }
+
+    @Override
+    public void downloadSertif() {
+        System.out.println("Mendownload file sertifikat Live Bootcamp: " + getTitle() + ".pdf");
+    }
+    
     public int getMinAttendancePercentage() { return minAttendancePercentage; }
 
     @Override
