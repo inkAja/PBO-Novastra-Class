@@ -3,25 +3,13 @@ package Abstract;
 import java.util.UUID;
 import Interface.Sertification;
 
-/**
- * Abstract class representing a Course entity.
- * Defines common properties and abstract methods for course types.
- */
 public abstract class Course {
     private UUID courseId;
     private String title;
     private String instructorName;
     private int durationWeeks;
 
-    /**
-     * Constructs a Course with the given parameters.
-     *
-     * @param courseId unique identifier for the course
-     * @param title course title
-     * @param instructorName name of the instructor
-     * @param durationWeeks course duration in weeks (must be positive)
-     * @throws IllegalArgumentException if any parameter is invalid
-     */
+
     public Course(UUID courseId, String title, String instructorName, int durationWeeks) {
         if (courseId == null) {
             throw new IllegalArgumentException("Course ID cannot be null");
@@ -41,20 +29,8 @@ public abstract class Course {
         this.durationWeeks = durationWeeks;
     }
 
-    /**
-     * Returns the type of the course (e.g., "Video", "Live_Bootcamp").
-     *
-     * @return the course type as a String
-     */
-    public abstract String getCourseType();
 
-    /**
-     * Checks if the course completion criteria are met.
-     *
-     * @param progressPercentage the progress percentage (0-100)
-     * @param portfolioScore the portfolio score
-     * @return true if completion criteria are met, false otherwise
-     */
+    public abstract String getCourseType();
     public abstract boolean checkCompletionCriteria(float progressPercentage, double portfolioScore);
 
     // Concrete Methods / Shared Behavior
